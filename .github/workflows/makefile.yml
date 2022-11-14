@@ -1,0 +1,43 @@
+#this is a bsic workflow to help get started with actions
+name: MLOps Test with GitHub Actions
+#control when workflow eill run
+#trigger the workflow on push
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+#this workflow contain single job called "build"
+  build:
+#this type of runner that job is will be run on
+    runs-on: ubuntu-latest
+    strategy: 
+      matrix:
+      python-version: ["3.6","3.7","3.8","3.9","3.10","3.11"]
+      
+    steps:
+    - uses: actions/checkout@v3
+    -name: Set up Python ${{matrix.python-version}}
+    uses: action/setup-python@v3
+    with:
+      python-version: ${{matrix.python-version}}
+      
+      #upo above all are same in all python 
+#run a single command using runner shell
+    - name: Run a one-line script #configure
+      run: |
+        echo hello, world!  #./configure
+#run a set of command using runner shell
+    - name: Install dependencies
+      run: |
+        make install
+
+    - name: check the python code  # Run check
+      run: |
+          make lint
+
+    - name: run unit test
+      run: |
+        make test
