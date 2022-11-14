@@ -2,12 +2,9 @@
 name: MLOps Test with GitHub Actions
 #control when workflow eill run
 #trigger the workflow on push
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+on:[push]
 
+#a workflow run is made up of one or more jobs taht can run sequentially or in parallel
 jobs:
 #this workflow contain single job called "build"
   build:
@@ -20,15 +17,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     -name: Set up Python ${{matrix.python-version}}
-    uses: action/setup-python@v3
-    with:
+     uses: action/setup-python@v3
+     with:
       python-version: ${{matrix.python-version}}
       
-      #upo above all are same in all python 
+      #upto above all are same in all python 
 #run a single command using runner shell
-    - name: Run a one-line script #configure
-      run: |
-        echo hello, world!  #./configure
+#     - name: Run a one-line script #configure
+#       run: |
+#         echo hello, world!  #./configure
 #run a set of command using runner shell
     - name: Install dependencies
       run: |
