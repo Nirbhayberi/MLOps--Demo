@@ -15,11 +15,11 @@ jobs:
         python-version: ["3.6","3.7","3.8","3.9","3.10","3.11"]
       
     steps:
-    - uses: actions/checkout@v3
-    -name: Set up Python ${{matrix.python-version}}
-     uses: action/setup-python@v3
-     with:
-      python-version: ${{matrix.python-version}}
+      -uses: actions/checkout@v3
+      -name: Set up Python ${{matrix.python-version}}
+       uses: action/setup-python@v3
+       with:
+        python-version: ${{matrix.python-version}}
       
       #upto above all are same in all python 
 #run a single command using runner shell
@@ -27,14 +27,14 @@ jobs:
 #       run: |
 #         echo hello, world!  #./configure
 #run a set of command using runner shell
-    - name: Install dependencies
-      run: |
-        make install
+      -name: Install dependencies
+       run: |
+         make install
 
-    - name: check the python code  # Run check
-      run: |
-          make lint
+      -name: check the python code  # Run check
+       run: |
+         make lint
 
-    - name: run unit test
-      run: |
-        make test
+      -name: run unit test
+       run: |
+         make test
